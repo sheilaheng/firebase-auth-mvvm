@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import net.simplifiedcoding.ui.AddScreen
 import net.simplifiedcoding.ui.auth.AuthViewModel
 import net.simplifiedcoding.ui.auth.LoginScreen
 import net.simplifiedcoding.ui.auth.SignupScreen
@@ -16,7 +17,7 @@ fun AppNavHost(
     viewModel: AuthViewModel,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUTE_LOGIN
+    startDestination: String = ROUTE_ADD
 ) {
     NavHost(
         modifier = modifier,
@@ -31,6 +32,9 @@ fun AppNavHost(
         }
         composable(ROUTE_HOME) {
             HomeScreen(viewModel, navController)
+        }
+        composable(ROUTE_ADD) {
+            AddScreen(viewModel, navController)
         }
     }
 }
