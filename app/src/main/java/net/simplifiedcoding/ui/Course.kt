@@ -8,10 +8,12 @@ import net.simplifiedcoding.ui.auth.AuthViewModel
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -102,6 +104,15 @@ fun firebaseUI(context: Context) {
     }
 
     val courseDescription = remember {
+        mutableStateOf("")
+    }
+
+    val institute = remember {
+        mutableStateOf("")
+    }
+
+
+    val lecturer = remember {
         mutableStateOf("")
     }
 
@@ -209,6 +220,68 @@ fun firebaseUI(context: Context) {
 
         Spacer(modifier = Modifier.height(10.dp))
 
+        TextField(
+            // on below line we are specifying
+            // value for our course name text field.
+            value = institute.value,
+
+            // on below line we are adding on
+            // value change for text field.
+            onValueChange = { institute.value = it },
+
+            // on below line we are adding place holder
+            // as text as "Enter your course name"
+            placeholder = { Text(text = "Enter the institute's name") },
+
+            // on below line we are adding modifier to it
+            // and adding padding to it and filling max width
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+
+            // on below line we are adding text style
+            // specifying color and font size to it.
+            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
+
+            // on below line we are adding
+            // single line to it.
+            singleLine = true,
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+
+        TextField(
+            // on below line we are specifying
+            // value for our course name text field.
+            value = lecturer.value,
+
+            // on below line we are adding on
+            // value change for text field.
+            onValueChange = { lecturer.value = it },
+
+            // on below line we are adding place holder
+            // as text as "Enter your course name"
+            placeholder = { Text(text = "Enter the lecturer's name") },
+
+            // on below line we are adding modifier to it
+            // and adding padding to it and filling max width
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+
+            // on below line we are adding text style
+            // specifying color and font size to it.
+            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
+
+            // on below line we are adding
+            // single line to it.
+            singleLine = true,
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+
         // on below line creating button to
         // add data to firebase firestore database.
         Button(
@@ -222,13 +295,22 @@ fun firebaseUI(context: Context) {
                 } else if (TextUtils.isEmpty(courseDescription.value.toString())) {
                     Toast.makeText(context, "Please enter course descritpion", Toast.LENGTH_SHORT)
                         .show()
+                } else if (TextUtils.isEmpty(institute.value.toString())) {
+                    Toast.makeText(context, "Please enter the Institute's Name", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (TextUtils.isEmpty(lecturer.value.toString())) {
+                    Toast.makeText(context, "Please enter Author's Name", Toast.LENGTH_SHORT)
+                        .show()
                 } else {
                     // on below line adding data to
                     // firebase firestore database.
                     addDataToFirebase(
                         courseName.value,
                         courseDuration.value,
-                        courseDescription.value, context
+                        courseDescription.value,
+                        institute.value,
+                        lecturer.value, context
+
                     )
                 }
             },
@@ -241,13 +323,32 @@ fun firebaseUI(context: Context) {
             // on below line we are adding text for our button
             Text(text = "Add Data", modifier = Modifier.padding(8.dp))
         }
+
+        Spacer(modifier = Modifier.height(5.dp))
+        //another button
+
+        var viewdata = LocalContext.current
+        Button(
+            onClick = {viewdata.startActivity(Intent(viewdata,viewdata::class.java)) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+
+        ) {
+
+            Text(text = "View Data", fontSize = 20.sp)
+        }
     }
 }
+
+
 
 fun addDataToFirebase(
     courseName: String,
     courseDuration: String,
     courseDescription: String,
+    institute: String,
+    lecturer: String,
     context: Context
 ) {
     // on below line creating an instance of firebase firestore.
@@ -255,7 +356,7 @@ fun addDataToFirebase(
     //creating a collection reference for our Firebase Firestore database.
     val dbCourses: CollectionReference = db.collection("Courses")
     //adding our data to our courses object class.
-    val courses = Course(courseName, courseDescription, courseDuration)
+    val courses = Course(courseName, courseDescription, courseDuration, institute, lecturer)
 
     //below method is use to add data to Firebase Firestore.
     dbCourses.add(courses).addOnSuccessListener {

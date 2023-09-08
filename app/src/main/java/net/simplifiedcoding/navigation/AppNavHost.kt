@@ -11,6 +11,7 @@ import net.simplifiedcoding.ui.auth.AuthViewModel
 import net.simplifiedcoding.ui.auth.LoginScreen
 import net.simplifiedcoding.ui.auth.SignupScreen
 import net.simplifiedcoding.ui.home.HomeScreen
+import net.simplifiedcoding.ui.viewcourses.viewScreen
 
 @Composable
 fun AppNavHost(
@@ -36,5 +37,17 @@ fun AppNavHost(
         composable(ROUTE_ADD) {
             AddScreen(viewModel, navController)
         }
+        composable(ROUTE_INSTITUTE) {
+            AddScreen(viewModel, navController)
+        }
+
+        composable(ROUTE_LECTURER) {
+            AddScreen(viewModel, navController)
+        }
+
+        composable(ROUTE_VIEWCOURSES) {
+            viewScreen(viewModel, navController)
+        }
+
     }
 }
