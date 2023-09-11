@@ -7,6 +7,7 @@ data class Course (
     var courseDescription:String? = "",
     var courseDuration:String? ="",
     var institute:String? ="",
-    var courselecturer:String? =""
+    var courselecturer:String? ="",
+    var courseId:String? = ""
 
         )

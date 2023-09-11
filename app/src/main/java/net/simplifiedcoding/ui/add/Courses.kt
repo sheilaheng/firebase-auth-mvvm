@@ -1,6 +1,4 @@
-package net.simplifiedcoding.ui
-
-
+package net.simplifiedcoding.ui.add
 
 import androidx.navigation.NavController
 import net.simplifiedcoding.ui.auth.AuthViewModel
@@ -36,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import net.simplifiedcoding.Course
+import net.simplifiedcoding.Courses
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -329,7 +328,7 @@ fun firebaseUI(context: Context) {
 
         var viewdata = LocalContext.current
         Button(
-            onClick = {viewdata.startActivity(Intent(viewdata,viewdata::class.java)) },
+            onClick = {  },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)

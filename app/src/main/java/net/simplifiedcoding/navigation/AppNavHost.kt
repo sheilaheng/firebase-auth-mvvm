@@ -6,11 +6,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import net.simplifiedcoding.ui.AddScreen
+
+import net.simplifiedcoding.ui.add.AddScreen
 import net.simplifiedcoding.ui.auth.AuthViewModel
 import net.simplifiedcoding.ui.auth.LoginScreen
 import net.simplifiedcoding.ui.auth.SignupScreen
 import net.simplifiedcoding.ui.home.HomeScreen
+import net.simplifiedcoding.ui.update.UpdateScreen
 import net.simplifiedcoding.ui.viewcourses.viewScreen
 
 @Composable
@@ -47,6 +49,9 @@ fun AppNavHost(
 
         composable(ROUTE_VIEWCOURSES) {
             viewScreen(viewModel, navController)
+        }
+        composable(ROUTE_UPDATE) {
+            UpdateScreen(viewModel, navController)
         }
 
     }

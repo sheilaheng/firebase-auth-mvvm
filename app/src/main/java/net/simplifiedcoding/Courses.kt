@@ -6,6 +6,7 @@ class Courses (
       var courseDescription:String = "",
       var courseDuration:String = "",
       var institute:String = "",
-      var lecturer:String = ""
+      var lecturer:String = "",
+      var courseId:String? = ""
 
         )

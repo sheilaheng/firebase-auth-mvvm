@@ -12,12 +12,14 @@ import net.simplifiedcoding.Courses
 import android.annotation.SuppressLint
 import android.widget.Toast
 import android.content.Context
+import android.content.Intent
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -30,15 +32,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
+import net.simplifiedcoding.Course
 
 
 import net.simplifiedcoding.ui.auth.AuthViewModel
-import net.simplifiedcoding.ui.firebaseUI
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -228,6 +227,8 @@ fun viewScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                                 // adding spacer on below line.
                                 Spacer(modifier = Modifier.width(5.dp))
 
+
+
                                 // on below line displaying text for course description
                                 courseList[index]?.courseDescription?.let {
                                     Text(
@@ -252,4 +253,6 @@ fun viewScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 }
             }
         }
+
+
 
